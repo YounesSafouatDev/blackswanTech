@@ -1,7 +1,7 @@
 # Variables
 DOCKER_COMPOSE = docker-compose
 COMPOSE_FILE = ./docker-compose.yml
-SERVICE = $(shell basename $(PWD))-web-1
+SERVICE = blackswantech-web-1
 DB_SERVICE = mydb
 DB_NAME = bst
 DB_USER = younes
