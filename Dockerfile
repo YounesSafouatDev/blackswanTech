@@ -7,8 +7,8 @@ COPY ./addons /mnt/extra-addons
 # Copy your Odoo configuration
 COPY ./odoo.conf /etc/odoo/odoo.conf
 
-# Set permissions (if needed)
-RUN chmod -R 755 /mnt/extra-addons /etc/odoo/odoo.conf
+# Set permissions (ignore errors for mounted volumes)
+RUN chmod -R --no-preserve-root 755 /mnt/extra-addons /etc/odoo/odoo.conf || true
 
 # Default command to start Odoo
 CMD ["odoo"]
