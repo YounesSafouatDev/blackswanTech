@@ -1,8 +1,14 @@
 # Base Odoo image
 FROM odoo:17.0
 
+# Switch to root to install packages
+USER root
+
 # Install make and other necessary tools
 RUN apt-get update && apt-get install -y make
+
+# Switch back to odoo user
+USER odoo
 
 # Copy your custom addons
 COPY ./addons /mnt/extra-addons
