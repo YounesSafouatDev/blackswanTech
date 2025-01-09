@@ -63,4 +63,4 @@ init-db:
 .PHONY: clean
 clean:
 	@echo "WARNING: This will remove containers, volumes, and images. Proceed with caution!"
-	@read -p "Are you sure you want to proceed? (y/n) " confirm && [ $ = "y" ] && $(DOCKER_COMPOSE) -f $(COMPOSE_FILE) down --volumes --rmi all && @echo "Removed containers, volumes, and images." || @echo "Clean operation canceled."
+	@read -p "Are you sure you want to proceed? (y/n) " confirm && [ $$confirm = "y" ] && $(DOCKER_COMPOSE) -f $(COMPOSE_FILE) down --volumes --rmi all && @echo "Removed containers, volumes, and images." || @echo "Clean operation canceled."
