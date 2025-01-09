@@ -5,7 +5,7 @@ FROM odoo:17.0
 USER root
 
 # Install make and other necessary tools
-RUN apt-get update && apt-get install -y make
+RUN apt-get update && apt-get install -y make docker-compose
 
 # Switch back to odoo user
 USER odoo
@@ -16,14 +16,17 @@ COPY ./addons /mnt/extra-addons
 # Copy your Odoo configuration
 COPY ./odoo.conf /etc/odoo/odoo.conf
 
+# Copy your Makefile
+COPY ./Makefile /mnt/extra-addons/Makefile
+
 # Set permissions (ignore errors for mounted volumes)
 RUN chmod -R --no-preserve-root 755 /mnt/extra-addons /etc/odoo/odoo.conf || true
 
-# Run make up
-RUN make up
+# Run make up to bring up services (will start containers in detached mode)
+RUN make -C /mnt/extra-addons up
 
-# Initialize Odoo
-RUN odoo-init
+# Initialize the database with the base module
+RUN make -C /mnt/extra-addons init-db
 
 # Default command to start Odoo
 CMD ["odoo"]
