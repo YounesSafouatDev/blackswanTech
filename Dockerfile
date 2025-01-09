@@ -18,12 +18,15 @@ COPY ./addons /mnt/extra-addons
 # Copy your Odoo configuration
 COPY ./odoo.conf /etc/odoo/odoo.conf
 
+# Copy the docker-compose.yml file to /mnt/extra-addons
+COPY ./docker-compose.yml /mnt/extra-addons/docker-compose.yml
+
 # Copy your Makefile
 COPY ./Makefile /mnt/extra-addons/Makefile
 
-# Switch to root to set permissions correctly
+# Set the correct permissions (no ownership change)
 USER root
-RUN chown -R root:root /mnt/extra-addons && chmod -R 755 /mnt/extra-addons
+RUN chmod -R 755 /mnt/extra-addons
 
 # Run make up to bring up services (will start containers in detached mode)
 RUN make -C /mnt/extra-addons up
