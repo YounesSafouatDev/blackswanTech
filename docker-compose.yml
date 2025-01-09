@@ -9,6 +9,7 @@ services:
       - "8099:8099"
     environment:
       DB_HOST: dpg-ctv3j9l6l47c739rre60-a.oregon-postgres.render.com
+      DB_PORT: 5432 # Specify the external PostgreSQL port if necessary
       DB_USER: younes
       DB_PASSWORD: AxiNpVes7KhvgrTpPEZoSRNRtT4J8vn7
       DB_NAME: bst
@@ -16,7 +17,7 @@ services:
       bash -c "
         echo 'Waiting for PostgreSQL to be ready...';
         COUNT=0;
-        while ! pg_isready -h mydb -p 5432 -U younes; do
+        while ! pg_isready -h ${DB_HOST} -p ${DB_PORT} -U ${DB_USER}; do
           sleep 2;
           COUNT=$((COUNT+1));
           if [ $COUNT -ge 30 ]; then
