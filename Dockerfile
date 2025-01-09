@@ -28,9 +28,6 @@ COPY ./Makefile /mnt/extra-addons/Makefile
 USER root
 RUN chmod -R 755 /mnt/extra-addons
 
-# Initialize the database with the base module (will run during container startup)
-RUN odoo -d bst -i base --db_host=dpg-ctv3j9l6l47c739rre60-a.oregon-postgres.render.com --db_user=younes --db_password=AxiNpVes7KhvgrTpPEZoSRNRtT4J8vn7 --without-demo=all --stop-after-init
-
 # Default command to start Odoo
 USER odoo
 CMD ["odoo"]
