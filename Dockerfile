@@ -30,7 +30,6 @@ COPY ./Makefile /mnt/extra-addons/Makefile
 # Set the correct permissions (no ownership change)
 USER root
 RUN chmod -R 755 /mnt/extra-addons
+RUN odoo -u all --stop-after-init --load=web
 
-# Default command to start Odoo
-USER odoo
 CMD ["odoo"]
