@@ -6,9 +6,11 @@ USER root
 
 # Install necessary tools
 RUN apt-get update && apt-get install -y curl make \
+    && apt-get remove --purge -y libnode-dev \
     && curl -sL https://deb.nodesource.com/setup_16.x | bash - \
     && apt-get install -y nodejs \
-    && npm install -g less node-sass
+    && npm install -g less node-sass \
+    && apt-get clean
 
 # Switch back to odoo user for Odoo operations
 USER odoo
