@@ -14,7 +14,7 @@ services:
       DB_PASSWORD: AxiNpVes7KhvgrTpPEZoSRNRtT4J8vn7
       DB_NAME: bst
     command: >
-      bash -c "
+      sh -c "
         echo 'Waiting for PostgreSQL to be ready...';
         COUNT=0;
         while ! pg_isready -h ${DB_HOST} -p ${DB_PORT} -U ${DB_USER}; do
