@@ -5,16 +5,10 @@ FROM odoo:17.0
 USER root
 
 # Install necessary tools
-RUN apt-get update && apt-get install -y curl make && \
-    curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
-    chmod +x /usr/local/bin/docker-compose
-
-# Install correct CSS and JS build dependencies
-RUN apt-get update && apt-get install -y \
-    less \
-    node-less \
-    python3-dev \
-    build-essential
+RUN apt-get update && apt-get install -y curl make \
+    && curl -sL https://deb.nodesource.com/setup_16.x | bash - \
+    && apt-get install -y nodejs \
+    && npm install -g less node-sass
 
 # Switch back to odoo user for Odoo operations
 USER odoo
