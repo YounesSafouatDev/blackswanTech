@@ -16,7 +16,7 @@ services:
       sh -c "
         echo 'Waiting for PostgreSQL to be ready...';
         COUNT=0;
-        while ! pg_isready -h ${DB_HOST} -p ${DB_PORT} -U ${DB_USER}; do
+        while ! pg_isready -h $DB_HOST -p $DB_PORT -U $DB_USER; do
           sleep 2;
           COUNT=$((COUNT+1));
           if [ $COUNT -ge 30 ]; then
