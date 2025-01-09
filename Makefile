@@ -2,7 +2,7 @@
 DOCKER_COMPOSE = docker-compose
 COMPOSE_FILE = ./docker-compose.yml
 SERVICE = blackswantech-web-1
-DB_SERVICE = mydb
+DB_SERVICE = dpg-ctv3j9l6l47c739rre60-a.oregon-postgres.render.com
 DB_NAME = bst
 DB_USER = younes
 DB_PASSWORD = AxiNpVes7KhvgrTpPEZoSRNRtT4J8vn7
