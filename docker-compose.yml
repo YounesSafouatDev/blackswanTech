@@ -14,6 +14,7 @@ services:
     volumes:
       - ./addons:/mnt/extra-addons
       - ./odoo.conf:/etc/odoo/odoo.conf
+      - ./filestore:/var/lib/odoo/.local/share/Odoo/filestore
     depends_on:
       - db
 
