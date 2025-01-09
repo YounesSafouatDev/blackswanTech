@@ -16,7 +16,7 @@ services:
       bash -c "
       echo 'Waiting for PostgreSQL to be ready...';
       COUNT=0;
-      while ! PGPASSWORD=${DB_PASSWORD} pg_isready -h ${DB_HOST} -p ${DB_PORT} -U ${DB_USER}; do
+      while ! PGPASSWORD=AxiNpVes7KhvgrTpPEZoSRNRtT4J8vn7 psql -h dpg-ctv3j9l6l47c739rre60-a.oregon-postgres.render.com -U younes bst; do
         sleep 2;
         COUNT=$((COUNT+1));
         if [ $COUNT -ge 30 ]; then
