@@ -4,8 +4,10 @@ FROM odoo:17.0
 # Switch to root to install packages
 USER root
 
-# Install make and other necessary tools
-RUN apt-get update && apt-get install -y make docker-compose
+# Install necessary tools
+RUN apt-get update && apt-get install -y curl make && \
+    curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
+    chmod +x /usr/local/bin/docker-compose
 
 # Switch back to odoo user
 USER odoo
@@ -19,10 +21,11 @@ COPY ./odoo.conf /etc/odoo/odoo.conf
 # Copy your Makefile
 COPY ./Makefile /mnt/extra-addons/Makefile
 
-# Set permissions (ignore errors for mounted volumes)
-RUN chmod -R --no-preserve-root 755 /mnt/extra-addons /etc/odoo/odoo.conf || true
+# Set the correct permissions and ownership
+RUN chown -R odoo:odoo /mnt/extra-addons && chmod -R 755 /mnt/extra-addons
 
 # Run make up to bring up services (will start containers in detached mode)
+USER root
 RUN make -C /mnt/extra-addons up
 
 # Initialize the database with the base module
