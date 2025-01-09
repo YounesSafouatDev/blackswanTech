@@ -3,17 +3,17 @@ services:
   web:
     image: odoo:17.0
     depends_on:
-      - mydb # You can remove this line since we're not using a local DB anymore
+      - mydb
     ports:
       - "8099:8099"
     environment:
-      DB_HOST: dpg-ctv3j9l6l47c739rre60-a.oregon-postgres.render.com # Replace with your Render DB host
-      DB_PORT: 5432
-      DB_USER: younes
-      DB_PASSWORD: AxiNpVes7KhvgrTpPEZoSRNRtT4J8vn7
-      DB_NAME: bst
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
     command: >
-      sh -c "
+      bash -c "
         echo 'Waiting for PostgreSQL to be ready...';
         COUNT=0;
         while ! pg_isready -h $DB_HOST -p $DB_PORT -U $DB_USER; do
@@ -32,16 +32,3 @@ services:
       - ./addons:/mnt/extra-addons
       - ./filestore:/var/lib/odoo/.local/share/Odoo/filestore
       - ./filestore/.local/share/Odoo/sessions:/var/lib/odoo/.local/share/Odoo/sessions
-
-# Remove the mydb service since we're not using a local database
-# mydb:
-#   image: postgres:15
-#   environment:
-#     POSTGRES_DB: bst
-#     POSTGRES_USER: younes
-#     POSTGRES_PASSWORD: AxiNpVes7KhvgrTpPEZoSRNRtT4J8vn7
-#   volumes:
-#     - mydb_data:/var/lib/postgresql/data
-
-volumes:
-  mydb_data:
