@@ -6,7 +6,7 @@ USER root
 
 # Install necessary tools
 RUN apt-get update && apt-get install -y curl make \
-    && apt-get remove --purge -y libnode-dev \
+    && apt-get remove --purge -y libnode-dev libnode72 \
     && curl -sL https://deb.nodesource.com/setup_16.x | bash - \
     && apt-get install -y nodejs \
     && npm install -g less node-sass \
